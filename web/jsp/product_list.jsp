@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Title</title>
+    <script src=""></script>
     <script>
         function addPage() {
             window.location.href = "${pageContext.request.contextPath}/jsp/addProduct.jsp";
@@ -51,6 +52,9 @@
         <tr>
             <td>
                     ${status.count}
+            </td>
+            <td>
+                    <input type="checkbox" id="selectAll"/>
             </td>
             <td>
                     ${p.pname}
