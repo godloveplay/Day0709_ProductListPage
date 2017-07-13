@@ -27,7 +27,23 @@
         <servlet-name>ProductDeleteServlet</servlet-name>
         <servlet-class>com.zmh.servlet.ProductDeleteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductDeleteAllServlet</servlet-name>
+        <servlet-class>com.zmh.servlet.ProductDeleteAllServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchForNameServlet</servlet-name>
+        <servlet-class>com.zmh.servlet.SearchForNameServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>SearchForNameServlet</servlet-name>
+        <url-pattern>/Servlet/SearchForNameServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDeleteAllServlet</servlet-name>
+        <url-pattern>/Servlet/ProductDeleteAllServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProductDeleteServlet</servlet-name>
         <url-pattern>/Servlet/ProductDeleteServlet</url-pattern>

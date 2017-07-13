@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.junit.Test;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -75,4 +76,17 @@ public class ProductDao {
         }
     }
 
+    public void deleteProduct(Connection connection, String s) throws SQLException {
+        QueryRunner queryRunner = new QueryRunner();
+        String sql = "DELETE FROM product WHERE pid = ?";
+        queryRunner.update(connection, sql, s);
+    }
+
+    //模糊查询 用名字
+    public List<Product> searchForName(String pname) throws SQLException {
+        QueryRunner queryRunner = new QueryRunner(DBUtils.getDataSource());
+        String sql = "SELECT * FROM product WHERE pname LIKE ? LIMIT 5";
+        List<Product> list = queryRunner.query(sql, new BeanListHandler<>(Product.class), pname + "%");
+        return list;
+    }
 }
