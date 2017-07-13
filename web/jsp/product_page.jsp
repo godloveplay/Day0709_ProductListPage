@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: zmh
-  Date: 2017/7/10
-  Time: 14:44
+  Date: 2017/7/13
+  Time: 11:47
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -110,7 +110,7 @@
             </tr>
             <%--<core:forEach var="p" items="${pageContext.request.getAttribute('listOfProducts')}">--%>
             <%--<core:forEach var="p" items="${pageContext.request.getAttribute('listOfProducts')}">--%>
-            <core:forEach var="p" items="${listOfProducts}" varStatus="status">
+            <core:forEach var="p" items="${pageBean.list}" varStatus="status">
                 <tr>
                     <td>
                         <input type="checkbox" id="ids" name="ids" value="${p.pid}"/>
@@ -156,9 +156,18 @@
                         <a href="#" onclick="del('${p.pid}')">删除</a>
                     </td>
                 </tr>
-
             </core:forEach>
-
+            <tr>
+                <td colspan="10" align="center">
+                    <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=1">[首页]</a>
+                    <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=1"
+                       +${pageBean.currPage - 1}">[上一页]</a>
+                    <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=1"
+                       +${pageBean.currPage + 1}">[下一页]</a>
+                    <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=1"
+                       +${pageBean.totalPage}">[尾页]</a>
+                </td>
+            </tr>
         </table>
     </form>
     <div id="upper">

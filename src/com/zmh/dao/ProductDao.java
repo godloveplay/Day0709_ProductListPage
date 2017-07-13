@@ -1,10 +1,12 @@
 package com.zmh.dao;
 
+import com.zmh.domian.PageBean;
 import com.zmh.domian.Product;
 import com.zmh.utils.DBUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -87,6 +89,22 @@ public class ProductDao {
         QueryRunner queryRunner = new QueryRunner(DBUtils.getDataSource());
         String sql = "SELECT * FROM product WHERE pname LIKE ? LIMIT 5";
         List<Product> list = queryRunner.query(sql, new BeanListHandler<>(Product.class), pname + "%");
+        return list;
+    }
+
+    public int findCount() throws SQLException {
+        QueryRunner queryRunner = new QueryRunner(DBUtils.getDataSource());
+        String sql = "SELECT count(*) FROM product";
+        Long count = queryRunner.query(sql, new ScalarHandler<>());
+        return count.intValue();
+    }
+
+    public List<Product> findByPage(int begin, int pageSize) throws SQLException {
+        QueryRunner queryRunner = new QueryRunner(DBUtils.getDataSource());
+        //LIMIT 接受一个或两个数字参数。参数必须是一个整数常量。如果给定两个参数，第一个参数指定第一个返回记录行的偏移量，第二个参数指定返回记录行的最大数目。初 始记录行的偏移量是 0(而不是 1)
+        String sql = "SELECT * FROM product ORDER BY pdate DESC LIMIT ?,?";
+        Object[] params = {begin, pageSize};
+        List<Product> list = queryRunner.query(sql, new BeanListHandler<>(Product.class), params);
         return list;
     }
 }

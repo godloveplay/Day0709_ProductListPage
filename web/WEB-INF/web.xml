@@ -35,7 +35,15 @@
         <servlet-name>SearchForNameServlet</servlet-name>
         <servlet-class>com.zmh.servlet.SearchForNameServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductFindByPageServlet</servlet-name>
+        <servlet-class>com.zmh.servlet.ProductFindByPageServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>ProductFindByPageServlet</servlet-name>
+        <url-pattern>/Servlet/ProductFindByPageServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchForNameServlet</servlet-name>
         <url-pattern>/Servlet/SearchForNameServlet</url-pattern>

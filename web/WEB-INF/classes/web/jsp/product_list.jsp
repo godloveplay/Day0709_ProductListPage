@@ -32,22 +32,30 @@
             //隐藏 div
             $("#upper").hide();
 
+
             $("input[name='pname']").keyup(function () {
                 var pname = $("input[name='pname']").val();
-                $.post("/Servlet/SearchForNameServlet", {'pname': pname}, function (data) {
-                    console.log("data----------------:" + $(data).pname);
-                    if ($(data) != null) {
-                        var $table = $("#showTable");
-                        //插入查询到的 商品名字
-                        $table.html("");
-                        $(data).each(function (index, element) {
-                            $table.append("<tr><td>" + element.pname + "</td></tr>")
-                        });
-                        //显示div
-                        $("#upper").show();
 
-                    }
-                }, "json")
+                if (pname != "") {
+                    $.post("/Servlet/SearchForNameServlet", {'pname': pname}, function (data) {
+                        console.log("data----------------:" + $(data).pname);
+                        if ($(data) != null) {
+                            var $table = $("#showTable");
+                            //插入查询到的 商品名字
+                            $table.html("");
+                            $(data).each(function (index, element) {
+                                $table.append("<tr><td>" + element.pname + "</td></tr>")
+                            });
+                            //显示div
+                            $("#upper").show();
+
+                        }
+                    }, "json")
+                } else {
+                    //隐藏 div
+                    $("#upper").hide();
+                }
+
             });
 
         });

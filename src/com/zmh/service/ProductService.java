@@ -1,9 +1,11 @@
 package com.zmh.service;
 
 import com.zmh.dao.ProductDao;
+import com.zmh.domian.PageBean;
 import com.zmh.domian.Product;
 import com.zmh.utils.DBUtils;
 import org.apache.commons.dbutils.DbUtils;
+import sun.dc.pr.PRError;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -54,6 +56,23 @@ public class ProductService {
     }
 
     public List<Product> searchForName(String pname) throws SQLException {
-       return new ProductDao().searchForName(pname);
+        return new ProductDao().searchForName(pname);
+    }
+
+    public PageBean findByPage(int currPage) throws SQLException {
+        PageBean pageBean = new PageBean();
+        ProductDao productDao = new ProductDao();
+        pageBean.setCurrPage(currPage);
+        pageBean.setPageSize(5);
+        int totalCount = productDao.findCount();
+        pageBean.setTotalCount(totalCount);
+        double tc = totalCount;
+        Double num = Math.ceil(tc / 5);
+        pageBean.setTotalPage(num.intValue());
+        int begin = (currPage - 1) * 5;
+        List<Product> list = productDao.findByPage(begin, 5);
+        pageBean.setList(list);
+
+        return pageBean;
     }
 }
