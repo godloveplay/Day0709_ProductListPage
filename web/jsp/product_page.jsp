@@ -37,7 +37,7 @@
                 var pname = $("input[name='pname']").val();
 
                 if (pname != "") {
-                    $.post("/Servlet/SearchForNameServlet", {'pname': pname}, function (data) {
+                    $.post("/day0709/Servlet/SearchForNameServlet", {'pname': pname}, function (data) {
                         console.log("data----------------:" + $(data).pname);
                         if ($(data) != null) {
                             var $table = $("#showTable");
@@ -160,12 +160,13 @@
             <tr>
                 <td colspan="10" align="center">
                     <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=1">[首页]</a>
-                    <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=1"
-                       +${pageBean.currPage - 1}">[上一页]</a>
-                    <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=1"
-                       +${pageBean.currPage + 1}">[下一页]</a>
-                    <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=1"
-                       +${pageBean.totalPage}">[尾页]</a>
+                    <core:if test="${pageBean.currPage != 1}">
+                        <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=${pageBean.currPage - 1}">[上一页]</a>
+                    </core:if>
+                    <core:if test="${pageBean.currPage != pageBean.totalPage}">
+                        <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=${pageBean.currPage + 1}">[下一页]</a>
+                    </core:if>
+                    <a href="${pageContext.request.contextPath}/Servlet/ProductFindByPageServlet?currPage=${pageBean.totalPage}">[尾页]</a>
                 </td>
             </tr>
         </table>
