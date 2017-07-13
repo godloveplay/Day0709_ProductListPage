@@ -1,4 +1,5 @@
-<%@ page import="com.zmh.utils.UUIDUtils" %><%--
+<%@ page import="com.zmh.utils.UUIDUtils" %>
+<%@ page import="net.sf.json.JSONArray" %><%--
   Created by IntelliJ IDEA.
   User: zmh
   Date: 2017/7/10
@@ -10,11 +11,31 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core" %>
 <html>
 <head>
+    <script src="${pageContext.request.contextPath}/jsp/jquery-3.2.1.min.js"></script>
     <title>Title</title>
+    <script>
+
+
+        function isChanged() {
+            <%--var arr = ['${Product.pid}',--%>
+            <%--'${Product.pname}',--%>
+            <%--'${Product.market_price}',--%>
+            <%--'${Product.shop_price}',--%>
+            <%--'${Product.is_hot}',--%>
+            <%--'${Product.pdesc}',--%>
+            <%--'${Product.pflag}',--%>
+            <%--'${Product.cid == 1}'];--%>
+
+            if ($("#pname")[0].value == "${Product.pname}") {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
 </head>
 <body>
 <h1>修改商品</h1>
-
 <form action="${pageContext.request.contextPath}/Servlet/ProductUpdateServlet" method="post">
     <input type="hidden" name="pid" value="${Product.pid}"/>
     <table border="1" width="600px">
@@ -63,7 +84,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="提交修改"/>
+                <input type="submit" value="提交修改" onclick="isChanged()"/>
             </td>
         </tr>
     </table>

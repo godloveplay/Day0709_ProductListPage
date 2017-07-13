@@ -3,7 +3,6 @@ package com.zmh.servlet;
 import com.zmh.domian.Product;
 import com.zmh.service.ProductService;
 import net.sf.json.JSONArray;
-import net.sf.json.JsonConfig;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

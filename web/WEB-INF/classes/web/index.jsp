@@ -13,5 +13,6 @@
 <body>
 <h1>欢迎来到商品信息管理平台</h1>
 <h3><a href="${ pageContext.request.contextPath }/Servlet/ProductFindAllServlet">查询所有商品</a></h3>
+<h3><a href="${ pageContext.request.contextPath }/Servlet/ProductFindByPageServlet?currPage=1">分页查询所有商品</a></h3>
 </body>
 </html>
